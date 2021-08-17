@@ -12,7 +12,7 @@ app.use(express.json());
 app.use(bodyParser.json());  
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect('mongodb://localhost:27017/e-commerce', {useNewUrlParser: true, useCreateIndex : true, useUnifiedTopology: true});
+mongoose.connect(process.env.DB_URL || 'mongodb://localhost:27017/e-commerce', {useNewUrlParser: true, useCreateIndex : true, useUnifiedTopology: true});
 
 
 app.get('/', (req, res) => {
