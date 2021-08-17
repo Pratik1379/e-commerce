@@ -14,7 +14,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect('mongodb://localhost:27017/e-commerce', {useNewUrlParser: true, useCreateIndex : true, useUnifiedTopology: true});
 
-app.get('/', async(req, res) => {
+
+app.get('/', (req, res) => {
+    res.redirect('/products');
+})
+app.get('/products', async(req, res) => {
        await Product.find({}).sort(req.query.sort).exec((err, products) => {
         if (err) {
             console.log(err);
@@ -25,9 +29,9 @@ app.get('/', async(req, res) => {
     //res.send(products);
 });
 
-app.get('/search',(req,res)=>{  
+app.get('/products/search',async (req,res)=>{  
     try {  
-        Product.find({$or:[{product_name:{'$regex':req.query.dsearch}},{products:{'$regex':req.query.dsearch}}]},(err,products)=>{  
+        await Product.find({$or:[{product_name:{'$regex':req.query.dsearch}},{products:{'$regex':req.query.dsearch}}]},(err,products)=>{  
             if(err){  
                  console.log(err);  
                 }   else{  
@@ -40,7 +44,7 @@ app.get('/search',(req,res)=>{
 }); 
 
 
-app.get('/:id', async(req, res) => {
+app.get('/products/:id', async(req, res) => {
     console.log(req.params);
     const {id} = req.params;
     console.log(id);

@@ -10,7 +10,7 @@
     
     <div class="container" > 
         <h3 style="text-align: center">All Products</h3>
-         <form class="form-inline my-2 my-lg-0" action="/search" method="get">    
+         <form class="form-inline my-2 my-lg-0" action="/products/search" method="get">    
                 <input class="form-control mr-sm-2" type="text" name="dsearch" placeholder="Search">    
                 <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>    
         </form>    
@@ -22,7 +22,7 @@
                 <% if(products[i].discounted_price > 0) { %>
                 <div class="col mb-4">
                     <div class="card h-100">
-                        <a href="/<%= products[i]._id %>" target="_blank">
+                        <a href="/products/<%= products[i]._id %>" target="_blank">
                             <img src="<%= products[i].image[0] %>" class="card-img-top" style = "height: 290px; width: 290px">
                             <div class="card-body">
                                 <h5 class="card-title"><%= products[i].product_name %></h5>
