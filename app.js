@@ -23,6 +23,8 @@ mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useCreateIndex : tr
 app.get('/', (req, res) => {
     res.redirect('/products');
 })
+
+
 app.get('/products', async(req, res) => {
        await Product.find({}).sort(req.query.sort).exec((err, products) => {
         if (err) {
