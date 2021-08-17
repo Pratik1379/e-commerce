@@ -1,10 +1,13 @@
+if(process.env.NODE_ENV !== "production") {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const ejs = require('ejs');
 const mongoose = require('mongoose');
 const Product = require('./models/Product.js');
 const bodyParser = require('body-parser');
-//const products = require('./productdf38641.json');
 
 app.use(express.urlencoded({ extended: false }));
 app.set('view engine', 'ejs');
@@ -12,7 +15,9 @@ app.use(express.json());
 app.use(bodyParser.json());  
 app.use(bodyParser.urlencoded({ extended: true }));
 
-mongoose.connect(process.env.DB_URL || 'mongodb://localhost:27017/e-commerce', {useNewUrlParser: true, useCreateIndex : true, useUnifiedTopology: true});
+
+//'mongodb://localhost:27017/e-commerce'
+mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useCreateIndex : true, useUnifiedTopology: true});
 
 
 app.get('/', (req, res) => {
